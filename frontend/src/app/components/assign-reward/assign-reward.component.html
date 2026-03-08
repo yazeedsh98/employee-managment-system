@@ -1,0 +1,121 @@
+<div class="container mt-4">
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <div class="card shadow-sm">
+        <div class="card-header bg-warning text-dark">
+          <h4 class="mb-0">
+            <i class="bi bi-trophy-fill me-2"></i>Assign Reward
+          </h4>
+        </div>
+        <div class="card-body">
+          <form [formGroup]="rewardForm" (ngSubmit)="onSubmit()">
+            
+            <!-- Employee Selection -->
+            <div class="mb-3">
+              <label for="employeeId" class="form-label">Employee</label>
+              <select 
+                class="form-select" 
+                id="employeeId"
+                formControlName="employeeId"
+                [class.is-invalid]="hasError('employeeId', 'required')">
+                <option value="">Select an employee</option>
+                <option *ngFor="let employee of employees" [value]="employee.id">
+                  {{ employee.name }} - {{ employee.department }}
+                </option>
+              </select>
+              <div class="invalid-feedback" *ngIf="hasError('employeeId', 'required')">
+                Please select an employee
+              </div>
+            </div>
+
+            <!-- Reward Name -->
+            <div class="mb-3">
+              <label for="rewardName" class="form-label">Reward Name</label>
+              <input 
+                type="text" 
+                class="form-control" 
+                id="rewardName"
+                formControlName="rewardName"
+                [class.is-invalid]="hasError('rewardName', 'required') || hasError('rewardName', 'minlength')"
+                placeholder="Enter reward name">
+              <div class="invalid-feedback" *ngIf="hasError('rewardName', 'required')">
+                Reward name is required
+              </div>
+              <div class="invalid-feedback" *ngIf="hasError('rewardName', 'minlength')">
+                Reward name must be at least 2 characters
+              </div>
+            </div>
+
+            <!-- Date Awarded -->
+            <div class="mb-3">
+              <label for="dateAwarded" class="form-label">Date Awarded</label>
+              <input 
+                type="date" 
+                class="form-control" 
+                id="dateAwarded"
+                formControlName="dateAwarded"
+                [class.is-invalid]="hasError('dateAwarded', 'required')">
+              <div class="invalid-feedback" *ngIf="hasError('dateAwarded', 'required')">
+                Date is required
+              </div>
+            </div>
+
+            <!-- Reward Type -->
+            <div class="mb-3">
+              <label for="type" class="form-label">Reward Type</label>
+              <select 
+                class="form-select" 
+                id="type"
+                formControlName="type"
+                [class.is-invalid]="hasError('type', 'required')">
+                <option value="">Select reward type</option>
+                <option *ngFor="let rewardType of rewardTypes" [value]="rewardType">
+                  {{ getRewardTypeLabel(rewardType) }}
+                </option>
+              </select>
+              <div class="invalid-feedback" *ngIf="hasError('type', 'required')">
+                Please select a reward type
+              </div>
+            </div>
+
+            <!-- Points -->
+            <div class="mb-3">
+              <label for="points" class="form-label">Points</label>
+              <input 
+                type="number" 
+                class="form-control" 
+                id="points"
+                formControlName="points"
+                [class.is-invalid]="hasError('points', 'required') || hasError('points', 'min') || hasError('points', 'pattern')"
+                placeholder="Enter points"
+                min="1">
+              <div class="invalid-feedback" *ngIf="hasError('points', 'required')">
+                Points are required
+              </div>
+              <div class="invalid-feedback" *ngIf="hasError('points', 'min') || hasError('points', 'pattern')">
+                Points must be a positive number
+              </div>
+            </div>
+
+            <!-- Buttons -->
+            <div class="d-flex gap-2">
+              <button 
+                type="submit" 
+                class="btn btn-warning"
+                [disabled]="rewardForm.invalid">
+                <i class="bi bi-check-circle me-2"></i>Assign Reward
+              </button>
+              <button 
+                type="button" 
+                class="btn btn-secondary"
+                (click)="onCancel()">
+                <i class="bi bi-x-circle me-2"></i>Cancel
+              </button>
+            </div>
+
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

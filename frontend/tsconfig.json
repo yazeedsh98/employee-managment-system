@@ -1,0 +1,27 @@
+{ //this file used to add some comilation options like --target ES2022, --module ES2022, --lib ES2022, --moduleResolution node, --importHelpers true, --declaration false, --experimentalDecorators true, --sourceMap true, --esModuleInterop true, --noImplicitOverride true, --noPropertyAccessFromIndexSignature true, --noImplicitReturns true, --noFallthroughCasesInSwitch true
+  "compileOnSave": false,
+  "compilerOptions": {
+    "outDir": "./dist/out-tsc",
+    "forceConsistentCasingInFileNames": true,
+    "strict": true,
+    "noImplicitOverride": true,
+    "noPropertyAccessFromIndexSignature": true,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
+    "esModuleInterop": true,
+    "sourceMap": true,
+    "declaration": false,
+    "experimentalDecorators": true,
+    "moduleResolution": "node",
+    "importHelpers": true,
+    "target": "ES2022",
+    "module": "ES2022",
+    "lib": ["ES2022", "dom"]
+  },
+  "angularCompilerOptions": {
+    "enableI18nLegacyMessageIdFormat": false,
+    "strictInjectionParameters": true,
+    "strictInputAccessModifiers": true,
+    "strictTemplates": true
+  }
+}

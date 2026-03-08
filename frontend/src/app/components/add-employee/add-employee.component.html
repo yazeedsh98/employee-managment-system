@@ -1,0 +1,94 @@
+<div class="container mt-4">
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <div class="card shadow-sm">
+        <div class="card-header bg-success text-white">
+          <h4 class="mb-0">
+            <i class="bi bi-person-plus-fill me-2"></i>Add New Employee
+          </h4>
+        </div>
+        <div class="card-body">
+          <form [formGroup]="employeeForm" (ngSubmit)="onSubmit()">
+            
+            <!-- Name Field -->
+            <div class="mb-3">
+              <label for="name" class="form-label">Name</label>
+              <input 
+                type="text" 
+                class="form-control" 
+                id="name"
+                formControlName="name"
+                [class.is-invalid]="hasError('name', 'required') || hasError('name', 'minlength') || hasError('name', 'maxlength')"
+                placeholder="Enter employee name">
+              
+              <div class="invalid-feedback" *ngIf="hasError('name', 'required')">
+                Name is required
+              </div>
+              <div class="invalid-feedback" *ngIf="hasError('name', 'minlength')">
+                Name must be at least 2 characters
+              </div>
+              <div class="invalid-feedback" *ngIf="hasError('name', 'maxlength')">
+                Name must not exceed 100 characters
+              </div>
+            </div>
+
+            <!-- Email Field -->
+            <div class="mb-3">
+              <label for="email" class="form-label">Email</label>
+              <input 
+                type="email" 
+                class="form-control" 
+                id="email"
+                formControlName="email"
+                [class.is-invalid]="hasError('email', 'required') || hasError('email', 'email')"
+                placeholder="Enter email address">
+              
+              <div class="invalid-feedback" *ngIf="hasError('email', 'required')">
+                Email is required
+              </div>
+              <div class="invalid-feedback" *ngIf="hasError('email', 'email')">
+                Please enter a valid email address
+              </div>
+            </div>
+
+            <!-- Department Field -->
+            <div class="mb-3">
+              <label for="department" class="form-label">Department</label>
+              <input 
+                type="text" 
+                class="form-control" 
+                id="department"
+                formControlName="department"
+                [class.is-invalid]="hasError('department', 'required') || hasError('department', 'maxlength')"
+                placeholder="Enter department">
+              
+              <div class="invalid-feedback" *ngIf="hasError('department', 'required')">
+                Department is required
+              </div>
+              <div class="invalid-feedback" *ngIf="hasError('department', 'maxlength')">
+                Department must not exceed 100 characters
+              </div>
+            </div>
+
+            <!-- Buttons -->
+            <div class="d-flex gap-2">
+              <button 
+                type="submit" 
+                class="btn btn-success"
+                [disabled]="employeeForm.invalid">
+                <i class="bi bi-check-circle me-2"></i>Add Employee
+              </button>
+              <button 
+                type="button" 
+                class="btn btn-secondary"
+                (click)="onCancel()">
+                <i class="bi bi-x-circle me-2"></i>Cancel
+              </button>
+            </div>
+
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

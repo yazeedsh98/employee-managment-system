@@ -1,0 +1,71 @@
+<div class="login-wrapper">
+
+    <mat-card class="login-card">
+
+        <mat-card-header>
+            <mat-card-title>Employee Rewards</mat-card-title>
+            <mat-card-subtitle>Login to your account</mat-card-subtitle>
+        </mat-card-header>
+
+        <mat-card-content>
+
+            <form [formGroup]="loginform" (ngSubmit)="login()">
+
+                <!-- Username -->
+                <mat-form-field appearance="outline" class="full-width">
+                    <mat-label>Username</mat-label>
+                    <input matInput formControlName="username">
+
+                    @if(loginform.controls['username'].hasError('required')) {
+                    <mat-error>
+                        Username is required
+                    </mat-error>
+                    }
+
+                    @if(loginform.controls['username'].hasError('minlength')) { 
+                    <mat-error>
+                        Minimum 3 characters required
+                    </mat-error>
+                    }
+                </mat-form-field>
+
+
+                <!-- Password -->
+                <mat-form-field appearance="outline" class="full-width">
+                    <mat-label>Password</mat-label>
+
+                    <input matInput [type]="hidePassword ? 'password' : 'text'" formControlName="password">
+
+                    <button mat-icon-button matSuffix type="button" (click)="hidePassword = !hidePassword">
+                        <mat-icon>
+                            {{hidePassword ? 'visibility' : 'visibility_off'}}
+                        </mat-icon>
+                    </button>
+
+                    @if (loginform.controls['password'].hasError('required')) {
+                    <mat-error>
+                        Password is required
+                    </mat-error>
+                    }
+
+                    @if (loginform.controls['password'].hasError('minlength')) {
+                    <mat-error>
+                        Minimum 4 characters required
+                    </mat-error>
+                    }
+
+                </mat-form-field>
+
+
+                <button mat-raised-button color="primary" class="login-button" type="submit"
+                    [disabled]="loginform.invalid">
+                    Login
+                </button>
+
+            </form>
+
+        </mat-card-content>
+
+    </mat-card>
+
+</div>
