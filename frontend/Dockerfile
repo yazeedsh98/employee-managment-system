@@ -5,8 +5,8 @@ WORKDIR /app
 # Copy package files
 COPY package*.json ./
 
-# Install dependencies
-RUN npm ci
+# Install dependencies (use npm install instead of npm ci)
+RUN npm install
 
 # Copy source code
 COPY . .
@@ -28,5 +28,5 @@ COPY --from=build /app/dist/employee-management ./dist
 # Expose port
 EXPOSE 8080
 
-# Start http-server
-CMD ["http-server", "dist", "-p", "8080", "--proxy", "http://localhost:8080?"]
+# Start http-server - bind to 0.0.0.0 to make it accessible from outside container
+CMD ["http-server", "dist", "-p", "8080", "-a", "0.0.0.0"]
